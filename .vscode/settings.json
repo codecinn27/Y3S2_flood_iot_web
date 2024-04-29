@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/e1963ae7-ac2e-494f-b7dc-20f6a1558464/resourceGroups/iotfloodBerr/providers/Microsoft.Web/sites/iotfloodBerr",
+    "appService.deploySubpath": "."
+}
