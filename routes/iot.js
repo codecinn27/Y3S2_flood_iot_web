@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var iot = require('../controllers/iot');
 
-/* GET home page. */
-router.get('/dashboard', function(req,res,next){
-  res.render('iot/dashboard');
-});
+router.route('/dashboard')
+    .get(iot.dashboardPage);
 
 module.exports = router;
