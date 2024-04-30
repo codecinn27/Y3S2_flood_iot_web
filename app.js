@@ -7,6 +7,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var crudRouter = require('./routes/crud');
+var iotRouter = require('./routes/iot');
 
 var app = express();
 
@@ -23,6 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/crud', crudRouter);
+app.use('/iot',iotRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -40,10 +44,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// //uncommon this line to run in localhost
-// const port = 3000;
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`)
-// })
+//uncommon this line to run in localhost
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 
 module.exports = app;
