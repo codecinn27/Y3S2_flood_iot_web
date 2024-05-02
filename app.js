@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const ejsMate = require('ejs-mate');
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var crudRouter = require('./routes/crud');
@@ -18,12 +19,15 @@ app.set('view engine', 'ejs');
 //to used ejs layout for boilerplate.ejs
 app.engine('ejs', ejsMate)
 
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+const session = require('express-session');
+const sessionOptions = { secret: 'thisisnotagoodsecret', resave:false, saveUninitialized:false};
+app.use(session(sessionOptions));
 
 //database connection
 const mongoose = require('mongoose');

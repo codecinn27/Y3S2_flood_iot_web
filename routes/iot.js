@@ -11,4 +11,7 @@ router.route('/datalog/:id')
 router.route('/notification')
     .get(iot.notificationDisplay);
 
+router.route('/about')
+    .get(iot.about);
+    
 module.exports = router;
