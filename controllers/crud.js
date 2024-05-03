@@ -1,4 +1,7 @@
 const Data = require('../models/data');
+var request = require("request");
+
+
 
 //create
 module.exports.inputPage = (req,res)=>{
@@ -25,3 +28,21 @@ module.exports.readAllData = async(req,res)=>{
 //update
 
 //delete
+
+
+module.exports.readDataFavoriot = async(req,res)=>{
+    var options = { method: 'GET',
+        url: 'https://apiv2.favoriot.com/v2/streams?max=10&order=asc',
+        headers: 
+        { 'cache-control': 'no-cache',
+            'content-type': 'application/json',
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imlpb3RzbWUiLCJyZWFkX3dyaXRlIjp0cnVlLCJpYXQiOjE3MTMyMzA0NTh9.NAgZ2-4KxSZjwGKr-CWKPc8ZMEMDikqVh5rHO_wOMOM' } 
+    };
+    request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    console.log(body);
+    res.send(body);
+    });
+    
+}

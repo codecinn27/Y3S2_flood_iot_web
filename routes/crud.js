@@ -8,4 +8,8 @@ router.route('/input')
 
 router.route('/allData')
     .get(crud.readAllData);
+
+router.route('/favoriot')
+    .get(crud.readDataFavoriot);
+    
 module.exports = router;

@@ -1,0 +1,3 @@
+1) img cannot be display in about us page
+2) data read from favoriot 
+3) saving data every 10mins into data and display at the datalog
