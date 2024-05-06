@@ -1,6 +1,23 @@
 const Data = require('../models/data');
+//used for favoriot
 var request = require("request");
+const axios = require("axios");
 
+//format timestamp into this form 29/4/24, 11:40:51 PM 
+function formatTimestamp(timestamp) {
+    const date = new Date(timestamp);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear() % 100; // Getting last two digits of the year
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    const meridian = hours >= 12 ? 'PM' : 'AM';
+    const formattedTime = `${day}/${month}/${year}, ${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds} ${meridian}`;
+    return formattedTime;
+};
+
+const oneMinute = 60 * 1000; // 60 seconds * 1000 milliseconds
 
 
 //create
@@ -25,14 +42,10 @@ module.exports.readAllData = async(req,res)=>{
     res.render('crud/allData',{AllData});
 }
 
-//update
-
-//delete
-
-
+//res render
 module.exports.readDataFavoriot = async(req,res)=>{
     var options = { method: 'GET',
-        url: 'https://apiv2.favoriot.com/v2/streams?max=10&order=asc',
+        url: 'https://apiv2.favoriot.com/v2/streams?device_developer_id=dht11_test_1_device@iiotsme&max=2&order=DESC',
         headers: 
         { 'cache-control': 'no-cache',
             'content-type': 'application/json',
@@ -41,8 +54,63 @@ module.exports.readDataFavoriot = async(req,res)=>{
     request(options, function (error, response, body) {
     if (error) throw new Error(error);
 
-    console.log(body);
-    res.send(body);
+    const parsedBody = JSON.parse(body);
+    const results = parsedBody.results;
+
+    let formattedResults = '';
+
+    results.forEach(result => {
+        formattedResults += `Timestamp: ${formatTimestamp(result.timestamp)}\n`;
+        formattedResults += `Data: ${JSON.stringify(result.data)}\n`;
+        formattedResults += '\n'; // Add spacing between each result
+    });
+    console.log(formattedResults);
+    /*res.send() function in Express does not interpret 
+    newline characters (\n) by default. */
+    res.render('crud/favoriot', {formattedResults})
     });
     
 }
+
+
+module.exports.getDataFavoriot = async(req,res)=>{
+    try {
+        const response = await axios.get('https://apiv2.favoriot.com/v2/streams?device_developer_id=dht11_test_1_device@iiotsme&max=1&order=DESC', {
+          headers: {
+            'cache-control': 'no-cache',
+            'content-type': 'application/json',
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imlpb3RzbWUiLCJyZWFkX3dyaXRlIjp0cnVlLCJpYXQiOjE3MTMyMzA0NTh9.NAgZ2-4KxSZjwGKr-CWKPc8ZMEMDikqVh5rHO_wOMOM'
+          }
+        });
+    
+        const results = response.data.results;
+    
+        const formattedResults = results.map(result => ({
+          timestamp: formatTimestamp(result.timestamp),
+          data: result.data
+        }));
+    
+        res.json(formattedResults);
+      } catch (error) {
+        console.error('Error fetching Favoriot data:', error);
+        res.status(500).json({ error: 'Failed to fetch Favoriot data' });
+      }
+}
+
+module.exports.renderingDataFavoriot = async(req,res)=>{
+    try{
+        const response = await axios.get('http://localhost:3000/crud/getDataFavoriot');
+        console.log(response.status);
+        if(response.status !== 200){
+            throw new Error('Failed to fetch Favoriot data');
+        }else{
+            console.log(response);
+            res.render('crud/favoriot2', {response})
+        }
+    }catch(error){
+        console.error('Error fetching data from Favoriot', error);
+        res.status(500).json({error: 'Failed to fetch data from Favoriot'});
+    }
+}
+
+//https://www.simform.com/blog/build-real-time-apps-node-js/
