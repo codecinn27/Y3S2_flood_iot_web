@@ -9,13 +9,14 @@
     <h1>Favoriot Data</h1>
     <div id="data">
         <div class="result">
-            <p id="timestamp">Timestamp: <%= response.timestamp %></p>
-            <p id="sensorData">Data: <%= JSON.stringify(response.data) %></p>
+            <p id="timestamp">Timestamp: <%= favoriotData.timestamp %></p>
+            <p id="sensorData">Data: <%= JSON.stringify(favoriotData.data) %></p>
         </div>
     </div>
     <script>
         const updateData = async ()=>{
             try{
+                // A status code of 304 indicates that the resource has not been modified since the last request. 
                 const response = await fetch('/crud/getDataFavoriot');
                 const parsedResponse = await response.json();
                 const { timestamp, data } = parsedResponse[0]; // Assuming the API returns an array with a single object

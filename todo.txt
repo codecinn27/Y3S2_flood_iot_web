@@ -1,3 +1,17 @@
 1) img cannot be display in about us page
 2) data read from favoriot 
 3) saving data every 10mins into data and display at the datalog
+
+7/5/2024
+1) solve 304 status code
+2) esp32 program sending data to the favoriot consistent
+3)storing data every 1 minutes into mongodb
+4) read data from mongodb datalog 
+- two collection
+5) triggering warning message when 4 sensor has danger value
+6) 1st qrcode to log into website
+2nd qrcode log into telegram triggering update
+
+-extra
+1) fuzzy logic 
+2) frontend design update
