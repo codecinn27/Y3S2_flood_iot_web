@@ -75,11 +75,11 @@ module.exports.readDataFavoriot = async(req,res)=>{
 
 module.exports.getDataFavoriot = async(req,res)=>{
     try {
-        const response = await axios.get('https://apiv2.favoriot.com/v2/streams?device_developer_id=flood_dev_env_1_device@iiotsme&max=1&order=DESC', {
+        const response = await axios.get('https://apiv2.favoriot.com/v2/streams?device_developer_id=dht11_test_1_device@iiotsme&max=1&order=DESC', {
           headers: {
             'cache-control': 'no-cache',
             'content-type': 'application/json',
-            'apikey': '5PVlogIoauXc1ihGC0u6yRYlmlALX1aE'
+            'apikey': 'RwxZ3MgXBcW1hB7iIeORFkdyBO3PsZ2n'
           }
         });
         //console.log("response: ",response);
@@ -98,6 +98,7 @@ module.exports.getDataFavoriot = async(req,res)=>{
       }
 }
 
+//testing to send data and display just one data
 module.exports.renderingDataFavoriot = async(req,res)=>{
     try{
         const response = await axios.get('http://localhost:3000/crud/getDataFavoriot');
@@ -117,5 +118,7 @@ module.exports.renderingDataFavoriot = async(req,res)=>{
         res.status(500).json({error: 'Failed to fetch data from Favoriot'});
     }
 }
+
+
 
 //https://www.simform.com/blog/build-real-time-apps-node-js/

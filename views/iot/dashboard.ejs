@@ -7,7 +7,7 @@
   <div class="row justify-content-center column-gap-4">
     <div class="col-3 col-lg-2 border bg-light border-black border-4">
       <div class="fs-4 px-2 py-2"><i class="fa-solid fa-temperature-full"></i>: Temperature</div>
-      <p class="fs-1 fw-bold text-center"> 26°C</p>
+      <p id="temperatureData" class="fs-1 fw-bold text-center"><%= JSON.stringify((parseInt(favoriotData.data.Rain)))%></p>
     </div>
     <div class="col-3 col-lg-2 border bg-light border-black border-4">
       <div class="fs-4 px-2 py-2">
@@ -29,7 +29,23 @@
     </div>
   </div>
 </div>
-  
+<script>
+  const updateData = async ()=>{
+      try{
+          // A status code of 304 indicates that the resource has not been modified since the last request. 
+          const response = await fetch('/iot/getData');
+          const parsedResponse = await response.json();
+          const { data } = parsedResponse[0]; // Assuming the API returns an array with a single object
+          document.getElementById('temperatureData').innerText = JSON.stringify((parseInt(data.Rain)));
+      }catch(err){
+          console.error(err);
+      }
+  }
+
+  // Call updateData initially and then every 5 seconds
+  updateData();
+  setInterval(updateData, 5000);
+</script>
 
 
 
