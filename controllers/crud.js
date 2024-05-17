@@ -49,7 +49,7 @@ module.exports.readDataFavoriot = async(req,res)=>{
         headers: 
         { 'cache-control': 'no-cache',
             'content-type': 'application/json',
-            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imlpb3RzbWUiLCJyZWFkX3dyaXRlIjp0cnVlLCJpYXQiOjE3MTMyMzA0NTh9.NAgZ2-4KxSZjwGKr-CWKPc8ZMEMDikqVh5rHO_wOMOM' } 
+            'apikey': process.env.FAVORIOT_API_KEY } 
     };
     request(options, function (error, response, body) {
     if (error) throw new Error(error);
@@ -79,7 +79,7 @@ module.exports.getDataFavoriot = async(req,res)=>{
           headers: {
             'cache-control': 'no-cache',
             'content-type': 'application/json',
-            'apikey': 'RwxZ3MgXBcW1hB7iIeORFkdyBO3PsZ2n'
+            'apikey': process.env.FAVORIOT_API_KEY
           }
         });
         //console.log("response: ",response);

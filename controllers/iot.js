@@ -53,7 +53,7 @@ module.exports.getDataFavoriot = async(req,res)=>{
           headers: {
             'cache-control': 'no-cache',
             'content-type': 'application/json',
-            'apikey': 'RwxZ3MgXBcW1hB7iIeORFkdyBO3PsZ2n'
+            'apikey': process.env.FAVORIOT_API_KEY
           }
         });
         //console.log("response: ",response);
