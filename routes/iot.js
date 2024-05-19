@@ -16,6 +16,9 @@ router.route('/notification')
 
 router.route('/about')
     .get(iot.about);
+
+router.route('/getLatestData')
+    .get(iot.getLatestData);
     
 
 module.exports = router;

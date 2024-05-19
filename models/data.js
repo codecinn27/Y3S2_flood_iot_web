@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const DataSchema = new Schema({
-    title: String,
-    price: Number
+const dataSchema = new Schema({
+    data1: String,
+    data2: String,
+    data3: String,
+    data4: String
+}, {
+    timestamps: true
 });
 
-module.exports = mongoose.model('Data', DataSchema);
+const Data = mongoose.model('Data', dataSchema);
+
+module.exports = Data;

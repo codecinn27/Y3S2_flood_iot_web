@@ -1,4 +1,6 @@
 const axios = require("axios");
+const Data = require('../models/Data'); // Import the Data model
+
 // Define a function to get the location name based on the id
 const getLocationName = (id) => {
     let locationName;
@@ -59,11 +61,38 @@ module.exports.getDataFavoriot = async(req,res)=>{
         //console.log("response: ",response);
         const result = response.data.results;
         const formattedData = result.map(item => ({
-            data: item.data
+            data1: item.data.data1,
+            data2: item.data.data2,
+            data3: item.data.data3,
+            data4: item.data.data4
         }));
+        const latestData = await Data.findOne().sort({ updatedAt: -1 });
+        if (!latestData) {
+            return res.status(404).json({ message: 'No data found' });
+        }
+        const newDataToSave = formattedData.filter(data=>{
+            return !(data.data1 === latestData.data1 &&
+                data.data2 === latestData.data2 &&
+                data.data3 === latestData.data3 &&
+                data.data4 === latestData.data4
+            );
+        });
+        if(newDataToSave.length >0){
+            const savedDataPromises = formattedData.map(async (data) => {
+                const newData = new Data(data);
+                await newData.save();
+            });
+    
+            await Promise.all(savedDataPromises);
+            console.log(formattedData);
+            return res.json(formattedData);
+        }else{
+            console.log("No new data to save");
+            return res.json(formattedData);
+        }
 
-        console.log(formattedData);
-        res.json(formattedData);
+
+
       } catch (error) {
         console.error('Error fetching Favoriot data:', error);
         res.status(500).json({ error: 'Failed to fetch Favoriot data' });
@@ -127,3 +156,15 @@ module.exports.about =(req,res)=>{
     res.render('iot/about', {data});
 }
 
+module.exports.getLatestData = async (req, res) => {
+    try {
+        const latestData = await Data.findOne().sort({ updatedAt: -1 });
+        if (!latestData) {
+            return res.status(404).json({ message: 'No data found' });
+        }
+        res.json(latestData);
+    } catch (error) {
+        console.error('Error fetching latest data:', error);
+        res.status(500).json({ error: 'Failed to fetch latest data' });
+    }
+};

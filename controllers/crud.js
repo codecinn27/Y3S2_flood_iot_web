@@ -1,4 +1,4 @@
-const Data = require('../models/data');
+//const Data = require('../models/data');
 //used for favoriot
 var request = require("request");
 const axios = require("axios");
