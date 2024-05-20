@@ -1,17 +1,24 @@
-1) img cannot be display in about us page
-2) data read from favoriot 
-3) saving data every 10mins into data and display at the datalog
+20/5/24
+1) able to display and save 4 data into ejs
 
-7/5/2024
-1) solve 304 status code
-2) esp32 program sending data to the favoriot consistent
-3)storing data every 1 minutes into mongodb
-4) read data from mongodb datalog 
-- two collection
-5) triggering warning message when 4 sensor has danger value
-6) 1st qrcode to log into website
-2nd qrcode log into telegram triggering update
+21/5/24
+1) able to rerun the route every 5 seconds and save the data
+
+to do
+1) read data from database , display the top 10 latest data
+2) telegram bot trigger if the system hit danger zone inform the user
+3)research whether the dashboard in favoriot has the api to display it in the webapp
 
 -extra
 1) fuzzy logic 
 2) frontend design update
+3) mapbox gl 
+- search bar
+- zoom in and out
+- two location
+- cluster
+- able to link to the flood system
+4) home page with the design
+5) javascript graph to visualize the data
+6) qrcode for the main page
+7) add utem and fkekk logo into the website

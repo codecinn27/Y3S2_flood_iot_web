@@ -91,8 +91,6 @@ module.exports.getDataFavoriot = async(req,res)=>{
             return res.json(formattedData);
         }
 
-
-
       } catch (error) {
         console.error('Error fetching Favoriot data:', error);
         res.status(500).json({ error: 'Failed to fetch Favoriot data' });
