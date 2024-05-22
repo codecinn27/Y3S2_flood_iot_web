@@ -20,5 +20,7 @@ router.route('/about')
 router.route('/getLatestData')
     .get(iot.getLatestData);
     
+router.route('/analysis')
+    .get(iot.analysis);
 
 module.exports = router;

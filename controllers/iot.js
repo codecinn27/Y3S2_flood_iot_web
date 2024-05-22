@@ -141,12 +141,18 @@ module.exports.dataLogDisplay = async(req,res,next)=>{
     }
     // Prepare data object
     const data = saveData(req.session.userid, req.session.locationName);
-    res.render('iot/datalog',  { data}); 
+    const latestTenData = await Data.find().sort({ updatedAt: -1 }).limit(10);
+    res.render('iot/datalog',  { data, favoriot_data:latestTenData}); 
 }
 
 module.exports.notificationDisplay =(req,res)=>{
     const data = saveData(req.session.userid, req.session.locationName);
     res.render('iot/notification',{data} );
+}
+
+module.exports.analysis=(req,res)=>{
+    const data = saveData(req.session.userid, req.session.locationName);
+    res.render('iot/analysis',{data})
 }
 
 module.exports.about =(req,res)=>{

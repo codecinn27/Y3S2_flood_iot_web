@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOT Web App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+        }
+        .iframe-container {
+          height: 100%;
+          width: 100%;
+        }
+        .iframe-container iframe {
+          height: 100%;
+          width: 100%;
+          border: none;
+          overflow: auto; /* or overflow: scroll; */
+        }
+      </style>
+</head>
+<body>
+
+    <%- include('../partials/navbar')  %>
+    <div class="iframe-container">
+        <iframe loading="lazy" src="https://platform.favoriot.com/public/dashboard/dht_11/53616c7465645f5f017a0072fe6f45c79b93dd5d1a01180c6adb0deee6422cf9a39851ee83d1dace6e4d7c12fc5e67d44f565ddd538c34ffb1feff2503e68841beb184547b4703430d50fead3a18d49e273398e15d7f31ab5483d14129f1ad6f175a3b0730288e50cfa66b87d062ab8c630796a84ec88811cbbfef87c742b082b00b432da471145e0765534ed356304e3fc490bb0c9b8fe77101ec7ccc010e6f0e405ba45ccb70bf6495833605daa9e614b778c883e98cedacb3b44f6cddf3fe7e5b193ee74725cd2c87423f0741c918fbd0d01299713b44dc8aed62bd2bdffb" name="Favoriot Platform" scrolling="auto"  allowfullscreen></iframe>
+    </div>
+    <%- include('../partials/footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
