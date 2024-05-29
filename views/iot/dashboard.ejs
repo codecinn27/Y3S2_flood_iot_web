@@ -7,12 +7,12 @@
   <div class="row justify-content-center column-gap-4">
     <div class="col-3 col-lg-2 border bg-light border-black border-4">
       <div class="fs-4 px-2 py-2"><i class="fa-solid fa-temperature-full"></i>: Temperature</div>
-      <p id="temperatureData" class="fs-1 fw-bold text-center"><%= parseInt(favoriotData.data1)%></p>
+      <p id="temperatureData" class="fs-1 fw-bold text-center"><%= parseInt(favoriotData.celsius)%></p>
     </div>
     <div class="col-3 col-lg-2 border bg-light border-black border-4">
       <div class="fs-4 px-2 py-2">
         <i class="fa-solid fa-droplet"></i>: Humidity</div>
-      <p id="humidityData" class="fs-1 fw-bold text-center"><%= parseInt(favoriotData.data2)%></p>
+      <p id="humidityData" class="fs-1 fw-bold text-center"><%= parseInt(favoriotData.humidity)%></p>
     </div>
   </div>
 </div>
@@ -21,11 +21,11 @@
   <div class="row justify-content-center column-gap-4 row-gap-4">
     <div class="col-3 col-lg-2 border bg-light border-black border-4">
       <div class="fs-4 px-2 py-2"><i class="fa-solid fa-temperature-full"></i>: Water Level</div>
-      <p id="waterData" class="fs-1 fw-bold text-center"><%= parseInt(favoriotData.data3)%></p>
+      <p id="waterData" class="fs-1 fw-bold text-center"><%= parseInt(favoriotData.distance)%></p>
     </div>
     <div class="col-3 col-lg-2 border border-black border-4 bg-light">
       <div class="fs-4 px-2 py-2"><i class="fa-solid fa-droplet"></i>: Rain Level</div>
-      <p id="rainData" class="fs-1 fw-bold text-center"><%= parseInt(favoriotData.data4)%></p>
+      <p id="rainData" class="fs-1 fw-bold text-center"><%= favoriotData.rain%></p>
     </div>
   </div>
 </div>
@@ -37,10 +37,10 @@
           const parsedResponse = await response.json();
           
           const data = parsedResponse[0]; // Assuming the API returns an array with a single object
-          document.getElementById('temperatureData').innerText = parseInt(data.data1);
-          document.getElementById('humidityData').innerText = parseInt(data.data2);
-          document.getElementById('waterData').innerText = parseInt(data.data3);
-          document.getElementById('rainData').innerText = parseInt(data.data4);
+          document.getElementById('temperatureData').innerText = parseInt(data.celsius);
+          document.getElementById('humidityData').innerText = parseInt(data.humidity);
+          document.getElementById('waterData').innerText = parseInt(data.distance);
+          document.getElementById('rainData').innerText = data.rain;
       }catch(err){
           console.error(err);
       }

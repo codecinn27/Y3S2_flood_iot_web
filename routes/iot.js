@@ -4,6 +4,11 @@ var iot = require('../controllers/iot');
 
 router.route('/getData')
     .get(iot.getDataFavoriot);
+
+//for development purpose
+router.route('/getData1')
+    .get(iot.getDataFavoriot1);
+
     
 router.route('/dashboard/:id')
     .get(iot.renderingDataFavoriot);
