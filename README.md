@@ -7,7 +7,7 @@
 - public website for realtime data reading for IOT using Favoriot platform and display into a webapp and trigger notification to telegram 
 
 # Website link
-https://iotfloodberr.azurewebsites.net/
+[https://iotfloodberr.azurewebsites.net/](https://iotfloodberr.azurewebsites.net/iot/dashboard/ayerkeroh)
 
 # Framework used
 ![Static Badge](https://img.shields.io/badge/espressif-%23E7352C?style=for-the-badge&logo=espressif&logoColor=white&labelColor=red&color=red)
