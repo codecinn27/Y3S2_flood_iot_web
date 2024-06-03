@@ -5,7 +5,9 @@ const dataSchema = new Schema({
     celsius: String,
     humidity: String,
     rain: String,
-    distance: String
+    rainValue: String,
+    distance: String,
+    status: String
 }, {
     timestamps: true
 });

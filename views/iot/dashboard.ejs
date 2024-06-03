@@ -7,7 +7,7 @@
   <div class="row justify-content-center column-gap-4">
     <div class="col-3 col-lg-2 border bg-light border-black border-4">
       <div class="fs-4 px-2 py-2"><i class="fa-solid fa-temperature-full"></i>: Temperature</div>
-      <p id="temperatureData" class="fs-1 fw-bold text-center"><%= parseInt(favoriotData.celsius)%></p>
+      <p id="temperatureData" class="fs-1 fw-bold text-center"><%= favoriotData.celsius%></p>
     </div>
     <div class="col-3 col-lg-2 border bg-light border-black border-4">
       <div class="fs-4 px-2 py-2">
@@ -32,14 +32,28 @@
 <script>
   const updateData = async ()=>{
       try{
-          // A status code of 304 indicates that the resource has not been modified since the last request. 
-          const response = await fetch('/iot/getData');
+          let endpoint;
+          // Determine the endpoint based on data.id
+          if ("<%= data.id %>" === "duriantunggal") {
+            endpoint = "/iot/getDurianTunggalData";
+          } else if ("<%= data.id %>" === "ayerkeroh") {
+            endpoint = "/iot/getAyerKerohData";
+          } else {
+            console.error("Invalid data id:", "<%= data.id %>");
+            return;
+          }
+
+          // Fetch the latest data from the determined endpoint
+          const response = await fetch(endpoint);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
           const parsedResponse = await response.json();
-          
           const data = parsedResponse[0]; // Assuming the API returns an array with a single object
-          document.getElementById('temperatureData').innerText = parseInt(data.celsius);
-          document.getElementById('humidityData').innerText = parseInt(data.humidity);
-          document.getElementById('waterData').innerText = parseInt(data.distance);
+
+          document.getElementById('temperatureData').innerText = parseInt(data.celsius).toFixed(2);
+          document.getElementById('humidityData').innerText = parseInt(data.humidity).toFixed(2);
+          document.getElementById('waterData').innerText = parseInt(data.distance).toFixed(2);
           document.getElementById('rainData').innerText = data.rain;
       }catch(err){
           console.error(err);

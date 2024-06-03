@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { AyerKeroh, DurianTunggal, AlorGajah } = require('./models/observation'); // Import your observation models
+const { AyerKeroh, DurianTunggal, AlorGajah } = require('../models/observation'); // Import your observation models
 
 // Connect to MongoDB
 //database connection

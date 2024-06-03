@@ -22,3 +22,7 @@ to do
 5) javascript graph to visualize the data
 6) qrcode for the main page
 7) add utem and fkekk logo into the website
+
+setup
+npm init
+npm i express mongoose dotenv ejs-mate axios http-errors ejs 
