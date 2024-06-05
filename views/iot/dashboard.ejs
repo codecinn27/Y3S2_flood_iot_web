@@ -1,16 +1,7 @@
 <% layout('layouts/boilerplate') %>
-  <div class="container-fluid px-4">
-    <div class="row align-items-center">
-      <div class="col">
-        <div class="h3 fw-bold">Dashboard</div>
-        <div class="h3 fw-bold">Location: <%= data.locationName %></div>
-      </div>
-      <div class="col text-end">
-        <div class="h3 fw-bold">Status: <span id="status"><%= favoriotData.status %></span></div>
-      </div>
-    </div>
-  </div>
-  
+<div class="h3 fw-bold px-4">Dashboard</div>
+<div class="h3 fw-bold px-4">Location: <%= data.locationName %></div>
+ 
 <div class="container-fluid my-4">
   <div class="row justify-content-center column-gap-4">
     <div class="col-4 col-lg-3 border bg-light border-black border-4">
@@ -36,7 +27,7 @@
     </div>
   </div>
 </div>
-
+<div class="h3 fw-bold px-4">Status: <span id="status"><%= favoriotData.status %></span></div>
 <script>
   const updateData = async ()=>{
       try{
