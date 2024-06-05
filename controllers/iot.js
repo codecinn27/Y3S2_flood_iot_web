@@ -425,7 +425,48 @@ module.exports.dataLogDisplay = async(req,res,next)=>{
     setDefaultSessionValues(req);
     // Prepare data object
     const data = saveData(req.session.userid, req.session.locationName);
-    const latestTenData = await Data.find().sort({ updatedAt: -1 }).limit(10);
+    let latestTenData;
+    // Get the latest data, sampled every 1 minute
+    if(data.id =="ayerkeroh"){
+        latestTenData = await AyerKeroh.aggregate([
+            {
+                $group: {
+                    _id: {
+                        year: { $year: "$createdAt" },
+                        month: { $month: "$createdAt" },
+                        day: { $dayOfMonth: "$createdAt" },
+                        hour: { $hour: "$createdAt" },
+                        minute: { $minute: "$createdAt" }
+                    },
+                    latestEntry: { $last: "$$ROOT" }
+                }
+            },
+            { $sort: { "latestEntry.createdAt": -1 } },
+            { $limit: 10 },
+            { $replaceRoot: { newRoot: "$latestEntry" } }
+        ]);
+    }else if(data.id == "duriantunggal"){
+        latestTenData = await DurianTunggal.aggregate([
+            {
+                $group: {
+                    _id: {
+                        year: { $year: "$createdAt" },
+                        month: { $month: "$createdAt" },
+                        day: { $dayOfMonth: "$createdAt" },
+                        hour: { $hour: "$createdAt" },
+                        minute: { $minute: "$createdAt" }
+                    },
+                    latestEntry: { $last: "$$ROOT" }
+                }
+            },
+            { $sort: { "latestEntry.createdAt": -1 } },
+            { $limit: 10 },
+            { $replaceRoot: { newRoot: "$latestEntry" } }
+        ]);        
+    }else {
+        return res.status(400).json({ error: 'Invalid location id dataLogDisplay' });
+    }
+
     res.render('iot/datalog',  { data, favoriot_data:latestTenData}); 
 }
 
