@@ -368,14 +368,32 @@ module.exports.renderingData = async(req,res)=>{
         }
         const data = saveData(req.session.userid, req.session.locationName);
         let response;
-        if(data.id === 'duriantunggal'){
-            response = await axios.get('http://localhost:3000/iot/getDurianTunggalData');
-            //const response = await axios.get('https://iotfloodberr.azurewebsites.net/iot/getDurianTunggalData'); 
-        }else if (id === "ayerkeroh") {
-            response = await axios.get('http://localhost:3000/iot/getAyerKerohData');
+        let baseUrl;
+
+        // Determine the base URL based on the environment
+        if (process.env.NODE_ENV === 'production') {
+            baseUrl = 'https://iotfloodberr.azurewebsites.net';
+        } else {
+            baseUrl = 'http://localhost:3000';
+        }
+
+        // Fetch the appropriate data based on the id
+        if (data.id === 'duriantunggal') {
+            response = await axios.get(`${baseUrl}/iot/getDurianTunggalData`);
+        } else if (id === 'ayerkeroh') {
+            response = await axios.get(`${baseUrl}/iot/getAyerKerohData`);
         } else {
             throw new Error("Invalid location id");
         }
+        // if(data.id === 'duriantunggal'){
+        //     response = await axios.get('http://localhost:3000/iot/getDurianTunggalData');
+        //     //response = await axios.get('https://iotfloodberr.azurewebsites.net/iot/getDurianTunggalData'); 
+        // }else if (data.id === 'ayerkeroh') {
+        //     response = await axios.get('http://localhost:3000/iot/getAyerKerohData');
+        //     //response = await axios.get('https://iotfloodberr.azurewebsites.net/iot/getAyerKerohData'); 
+        // } else {
+        //     throw new Error("Invalid location id");
+        // }
 
         // Check if response contains data
         const responseData = response.data;
