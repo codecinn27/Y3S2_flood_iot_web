@@ -30,13 +30,29 @@ function setDefaultSessionValues(req) {
     }
 }
 
-const saveData = (id,location)=>{
+const saveData = async (id, location) => {
+    let status = '';
+
+    if (id === 'ayerkeroh') {
+        const latestData = await AyerKeroh.findOne().sort({ createdAt: -1 });
+        if (latestData) {
+            status = latestData.status;
+        }
+    } else if (id === 'duriantunggal') {
+        const latestData = await DurianTunggal.findOne().sort({ createdAt: -1 });
+        if (latestData) {
+            status = latestData.status;
+        }
+    }
+
     const data = {
         id: id,
-        locationName: location
+        locationName: location,
+        status: status
     };
+
     return data;
-}
+};
 
 
 module.exports.dashboardPage = (req,res)=>{
@@ -56,7 +72,7 @@ module.exports.switchCollection = async (req,res, next)=>{
     if (!req.session.locationName) {
         return res.status(400).json({ error: 'Invalid collection id' });
     }
-    const data = saveData(req.session.userid, req.session.locationName);
+    const data = await saveData(req.session.userid, req.session.locationName);
     res.render('iot/dashboard',  { data});
 }
 
@@ -366,7 +382,7 @@ module.exports.renderingData = async(req,res)=>{
         if (!req.session.locationName) {
             return res.status(400).json({ error: 'Invalid collection id' });
         }
-        const data = saveData(req.session.userid, req.session.locationName);
+        const data = await saveData(req.session.userid, req.session.locationName);
         let response;
         let baseUrl;
 
@@ -424,7 +440,7 @@ module.exports.dataLogDisplay = async(req,res,next)=>{
     // Call the function to set default session values
     setDefaultSessionValues(req);
     // Prepare data object
-    const data = saveData(req.session.userid, req.session.locationName);
+    const data = await saveData(req.session.userid, req.session.locationName);
     let latestTenData;
     // Get the latest data, sampled every 1 minute
     if(data.id =="ayerkeroh"){
@@ -470,24 +486,24 @@ module.exports.dataLogDisplay = async(req,res,next)=>{
     res.render('iot/datalog',  { data, favoriot_data:latestTenData}); 
 }
 
-module.exports.notificationDisplay =(req,res)=>{
+module.exports.notificationDisplay = async(req,res,next)=>{
     // Call the function to set default session values
     setDefaultSessionValues(req);
-    const data = saveData(req.session.userid, req.session.locationName);
+    const data = await saveData(req.session.userid, req.session.locationName);
     res.render('iot/notification',{data} );
 }
 
-module.exports.analysis=(req,res)=>{
+module.exports.analysis= async(req,res,next)=>{
     // Call the function to set default session values
     setDefaultSessionValues(req);
-    const data = saveData(req.session.userid, req.session.locationName);
+    const data = await saveData(req.session.userid, req.session.locationName);
     res.render('iot/analysis',{data})
 }
 
-module.exports.about =(req,res)=>{
+module.exports.about = async(req,res, next)=>{
     // Call the function to set default session values
     setDefaultSessionValues(req);
-    const data = saveData(req.session.userid, req.session.locationName);
+    const data = await saveData(req.session.userid, req.session.locationName);
     res.render('iot/about', {data});
 }
 
