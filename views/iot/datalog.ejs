@@ -1,34 +1,20 @@
 <% layout('layouts/boilerplate') %>
-
-<!-- <div class="container-fluid px-4">
-  <div class="row align-items-start">
-    <div class="col-7">
-      <div class="h3 fw-bold" style="font-size:5vw">Location: <%= data.locationName %></div>
-      <div class="h3 fw-bold" style="font-size:5vw">Data Log</div>
-    </div>
-    <div class="col-5">
-      <div class="h3 fw-bold text-end" style="font-size:5vw">Status: Safe</div>
-    </div>
-  </div>
-</div> -->
 <div class="h3 fw-bold px-4">Data Log</div>
 <div class="h3 fw-bold px-4">Location: <%= data.locationName %></div>
 
 <% favoriot_data.forEach((entry,index)=>{ %>
-<div class="container py-2">
-  <div class="row border border-2 border-black mx-1">
-    <div class="col-xl-2 col-sm-4 border-end border-bottom border-black">Date: <%= new Date(entry.updatedAt).toLocaleDateString() %></div>
-    <div class="col-xl-2 col-sm-4 border-end border-bottom border-black">Time: <%= new Date(entry.updatedAt).toLocaleTimeString() %></div>
-    <div class="w-100"></div>
-    <div class="col">Temperature: <%= entry.celsius%></div>
-    <div class="w-100"></div>
-    <div class="col">Water level: <%= entry.distance %>cm</div>
-    <div class="w-100"></div>
-    <div class="col">Humidity: <%= entry.humidity %></div>
-    <div class="w-100"></div>
-    <div class="col">Rain Status: <%= entry.rain %></div>
+  <div class="container py-2">
+    <div class="row border border-2 border-black mx-1">
+      <div class="border-bottom border-black">Date: <%= new Date(entry.updatedAt).toLocaleDateString() %></div>
+      <div class="w-100 border-bottom border-black">Time: <%= new Date(entry.updatedAt).toLocaleTimeString() %></div>
+      <div class="w-100">Temperature: <%= entry.celsius%></div>
+      <div class="w-100">Water level: <%= entry.distance %>cm</div>
+      <div class="w-100">Humidity: <%= entry.humidity %></div>
+      <div class="w-100">Rain Status: <%= entry.rain %></div>
+      <div class="w-100">Rain Value: <%= entry.rainValue %></div>
+      <div class="w-100">Status: <%= entry.status %></div>
+    </div>
   </div>
-</div>
 <% }) %>
 <div class="pb-5"></div>
 <div class="pb-5"></div>
