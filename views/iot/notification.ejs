@@ -1,21 +1,36 @@
 <% layout('layouts/boilerplate') %>
-<div class="fs-3 fw-bold px-4">Notification</div>
-  
-<div class="container py-2">
-  <div class="row border border-2 border-black mx-2">
-    <div class="col fs-3 fw-bold">Danger in Ayer Keroh</div>
-    <div class="w-100"></div>
-    <div class="col">Temperature: 26°C</div>
-    <div class="w-100"></div>
-    <div class="col">Water level: 5cm</div>
-    <div class="w-100"></div>
-    <div class="col">Humidity: 60%</div>
-    <div class="w-100"></div>
-    <div class="col">Rain Level: 5mm</div>
-    <div class="w-100"></div>
-    <div class="col text-end py-2 fs-5">17/4/2024, 2.13pm</div>
-  </div>
-</div>
+<div class="fs-3 fw-bold px-4">Alert Notification</div>
+
+<%if (alertStatuses.length>0) {%>
+  <% alertStatuses.forEach((entry,index)=>{ %>
+    <div class="container py-2">
+      <div class="row border border-2 border-black mx-2">
+        <div class="col fs-3 fw-bold"><%= entry.status %> in <%= entry.location %></div>
+        <div class="w-100"></div>
+        <div class="col">Temperature: <%= entry.celsius %></div>
+        <div class="w-100"></div>
+        <div class="col">Water level: <%= entry.distance %>cm</div>
+        <div class="w-100"></div>
+        <div class="col">Humidity: <%= entry.humidity %></div>
+        <div class="w-100"></div>
+        <div class="col">Rain Status: <%= entry.rain %></div>
+        <div class="w-100"></div>
+        <div class="col text-end py-2 fs-5">
+          <%= new Date(entry.createdAt).toLocaleDateString() %>, <%= new Date(entry.createdAt).toLocaleTimeString() %>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+<% } else { %>
+  <div class="alert alert-info">No alerts at the moment.</div>
+<% } %>
+
+<div class="pb-5"></div>
+<div class="pb-5"></div>
+<div class="pb-3"></div>
+
+
+
 
 
 
