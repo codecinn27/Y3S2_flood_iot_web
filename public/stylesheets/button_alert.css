@@ -1,0 +1,102 @@
+.button_alert button{
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #03e9f4;
+    overflow: hidden;
+    border: none; /* Remove border outline */
+    background-color: white; /* Set background color */
+    font-weight: bold; /* Make button text bold */
+  }
+  
+.button_alert button:hover{
+    /* background: #03e9f4; */
+    background: #fff;
+    color: rgb(113, 123, 230);
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+    }
+
+.button_alert button span{
+    position: absolute;
+    display: block;
+}
+
+.button_alert button span:nth-child(1){
+    top: 0;
+    left: -100%;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg,#fff,#03e9f4);
+    animation: btn1 1s linear infinite;
+}
+
+@keyframes btn1{
+    0%{
+        left: -100%;
+    }
+    50%,100%{
+        left: 100%;
+    }
+}
+
+.button_alert button span:nth-child(2){
+    top: -100%;
+    right: 0%;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(180deg,#fff,#03e9f4);
+    animation: btn2 1s linear infinite;
+    animation-delay: 0.25s;
+}
+
+@keyframes btn2{
+    0%{
+        top: -100%;
+    }
+    50%,100%{
+        top: 100%;
+    }
+}
+
+.button_alert button span:nth-child(3){
+    bottom: 0;
+    right: -100%;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(270deg,#fff,#03e9f4);
+    animation: btn3 1s linear infinite;
+    animation-delay: 0.5s;
+}
+
+@keyframes btn3{
+    0%{
+        right: -100%;
+    }
+    50%, 100%{
+        right: 100%;
+    }
+}
+
+.button_alert button span:nth-child(4){
+    bottom: -100%;
+    left: 0%;
+    height: 100%;
+    width: 3px;
+    background: linear-gradient(360deg,#fff,#03e9f4);
+    animation: btn4 1s linear infinite;
+    animation-delay: 0.75s;
+}
+
+@keyframes btn4{
+    0%{
+        bottom:-100%;
+    }
+    50%, 100%{
+        bottom: 100%;
+    }
+}

@@ -1,7 +1,19 @@
 <footer class="container-fluid fixed-bottom">
-    <div class="row border-bottom border-4 border-black bg-light">
-      <div class="col mx-2 fs-3 fw-bold">Status: <span id="status"><%= data.status %></span></div>
+  <div class="row border-bottom border-4 border-black bg-light">
+    <div class="col mx-2 fs-3 fw-bold">
+        Status: <span id="status"><%= data.status %></span>
     </div>
+    <div class="col-auto mx-2 button_alert ">
+        <button class="fs-4" onclick="sendFavoriotCommand(1)">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Gate Close
+        </button>
+    </div>
+  </div>
+
     <div class="row text-center fs-3 bg-light">
       <a href="/iot/dashboard/<%= data.id%>" class="col p-2 border-end border-4 border-black">
         <i class="fa-solid fa-table"></i>
@@ -20,3 +32,5 @@
       </a>
     </div>
 </footer>
+
+

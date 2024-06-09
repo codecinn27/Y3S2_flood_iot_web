@@ -89,7 +89,7 @@ module.exports.getDataAyerKeroh = async(req,res)=>{
 
         //console.log("response: ",response);
         const result = response.data.results;
-        console.log("from getDataAyerKeroh, line 198 result:",result);
+        //console.log("from getDataAyerKeroh, line 198 result:",result);
 
         const formattedData = result.map(item => ({
             celsius: parseFloat(item.data.celsius).toFixed(2),
@@ -157,7 +157,7 @@ module.exports.getDataDurianTunggal = async(req,res)=>{
 
         //console.log("response: ",response);
         const result = response.data.results;
-        console.log("from getDataDurianTunggal, line 266 result:",result);
+        //console.log("from getDataDurianTunggal, line 266 result:",result);
 
         const formattedData = result.map(item => ({
             celsius: parseFloat(item.data.celsius).toFixed(2),

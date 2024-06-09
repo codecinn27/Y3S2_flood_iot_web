@@ -1,0 +1,28 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .container1 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  iframe {
+      height: 100%;
+      width: 100%;
+      border: none; /* Removes the iframe border */
+  }
+
+  /* Default height for iframe */
+  iframe {
+      height: 80vh; /* 70% of the viewport height */
+  }
+
+  /* Adjust height for smaller screens */
+  @media (max-width: 768px) {
+      iframe {
+          height: 70vh; /* 60% of the viewport height for tablets and phones */
+      }
+  }
