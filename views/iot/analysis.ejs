@@ -60,6 +60,19 @@
         .then(data => console.log(data))
         .catch(error => console.error('There was a problem with the fetch operation:', error));
       }
+
+      document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('toggleButton');
+            
+            button.addEventListener('click', function() {
+                if (button.textContent.trim() === 'Swiss Gate') {
+                    button.textContent = 'Gate Open';
+                    setTimeout(function() {
+                        button.textContent = 'Swiss Gate';
+                    }, 10000); // 20 seconds
+                }
+            });
+        });
     </script>
 </body>
 </html>
