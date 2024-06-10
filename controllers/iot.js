@@ -241,12 +241,17 @@ module.exports.renderingData = async(req,res)=>{
     try{
         const {id} = req.params;
     
-        // Set session variables
-        req.session.userid = id;
-        req.session.locationName = getLocationName(id);
-        // Check if location name is valid
-        if (!req.session.locationName) {
-            return res.status(400).json({ error: 'Invalid collection id' });
+        if (id) {
+            // Set session variables from params
+            req.session.userid = id;
+            req.session.locationName = getLocationName(id);
+            // Check if location name is valid
+            if (!req.session.locationName) {
+                return res.status(400).json({ error: 'Invalid collection id' });
+            }
+        } else {
+            // Set default session values if no id is provided
+            setDefaultSessionValues(req);
         }
         const data = await saveData(req.session.userid, req.session.locationName);
         let response;
@@ -287,15 +292,18 @@ module.exports.renderingData = async(req,res)=>{
 module.exports.dataLogDisplay = async(req,res,next)=>{
     const {id} = req.params;
     
-    // Set session variables
-    req.session.userid = id;
-    req.session.locationName = getLocationName(id);
-    // Check if location name is valid
-    if (!req.session.locationName) {
-        return res.status(400).json({ error: 'Invalid collection id' });
+    if (id) {
+        // Set session variables from params
+        req.session.userid = id;
+        req.session.locationName = getLocationName(id);
+        // Check if location name is valid
+        if (!req.session.locationName) {
+            return res.status(400).json({ error: 'Invalid collection id' });
+        }
+    } else {
+        // Set default session values if no id is provided
+        setDefaultSessionValues(req);
     }
-    // Call the function to set default session values
-    setDefaultSessionValues(req);
     // Prepare data object
     const data = await saveData(req.session.userid, req.session.locationName);
     let latestTenData;
