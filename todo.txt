@@ -25,4 +25,7 @@ to do
 
 setup
 npm init
-npm i express mongoose dotenv ejs-mate axios http-errors ejs 
+npm i express mongoose dotenv ejs-mate axios http-errors ejs
+// formatting time to Malaysia Time
+npm install moment moment-timezone
+

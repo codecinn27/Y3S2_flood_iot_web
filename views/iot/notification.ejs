@@ -16,7 +16,7 @@
         <div class="col">Rain Status: <%= entry.rain %></div>
         <div class="w-100"></div>
         <div class="col text-end py-2 fs-5">
-          <%= new Date(entry.createdAt).toLocaleDateString() %>, <%= new Date(entry.createdAt).toLocaleTimeString() %>
+          <%= entry.date %>, <%= entry.time %>
         </div>
       </div>
     </div>

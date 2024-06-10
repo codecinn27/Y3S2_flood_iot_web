@@ -1,4 +1,5 @@
 const axios = require("axios");
+const moment = require('moment-timezone');
 const Data = require('../models/data'); // Import the Data model
 const { AyerKeroh, DurianTunggal } = require('../models/data2');
 
@@ -54,6 +55,26 @@ const saveData = async (id, location) => {
     return data;
 };
 
+function formatDateAndTime(timestamp) {
+    const date = new Date(timestamp);
+
+    // Extracting date components
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
+    const day = date.getDate();
+
+    // Extracting time components
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    // Formatting date and time
+    const formattedDate = `${year}-${month}-${day}`;
+    const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+    return { date: formattedDate, time: formattedTime };
+}
+
 
 module.exports.dashboardPage = (req,res)=>{
     // Call the function to set default session values
@@ -98,7 +119,9 @@ module.exports.getDataAyerKeroh = async(req,res)=>{
             rain: item.data.rain, // Assuming rain data does not need formatting
             rainValue: parseFloat(item.data.rainValue).toFixed(2),
             distance: parseFloat(item.data.distance).toFixed(2),
-            status: item.data.status
+            status: item.data.status,
+            ...formatDateAndTime(item.timestamp)
+
         }));
         const latestData = await AyerKeroh.findOne().sort({ updatedAt: -1 });
         // Check if there is new data to save
@@ -166,7 +189,8 @@ module.exports.getDataDurianTunggal = async(req,res)=>{
             rain: item.data.rain, // Assuming rain data does not need formatting
             rainValue: parseFloat(item.data.rainValue).toFixed(2),
             distance: parseFloat(item.data.distance).toFixed(2),
-            status: item.data.status
+            status: item.data.status,
+            ...formatDateAndTime(item.timestamp)
         }));
         const latestData = await DurianTunggal.findOne().sort({ updatedAt: -1 });
         // Check if there is new data to save

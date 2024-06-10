@@ -1,7 +1,6 @@
 .button_alert button{
     position: relative;
     display: inline-block;
-    text-transform: uppercase;
     text-decoration: none;
     color: #03e9f4;
     overflow: hidden;

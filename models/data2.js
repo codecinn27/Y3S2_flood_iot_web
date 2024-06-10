@@ -9,10 +9,10 @@ const dataSchema = new Schema({
     rain: String,
     rainValue: String,
     distance: String,
-    status: String
-}, {
-    timestamps: true
-});
+    status: String,
+    time: String,
+    date: String,
+} ,{ timestamps: true }); // Add timestamps option
 
 // Create models for AyerKeroh and DurianTunggal using the same schema
 const AyerKeroh = mongoose.model('AyerKeroh', dataSchema);

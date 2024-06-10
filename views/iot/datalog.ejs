@@ -5,8 +5,8 @@
 <% favoriot_data.forEach((entry,index)=>{ %>
   <div class="container py-2">
     <div class="row border border-2 border-black mx-1">
-      <div class="border-bottom border-black">Date: <%= new Date(entry.updatedAt).toLocaleDateString() %></div>
-      <div class="w-100 border-bottom border-black">Time: <%= new Date(entry.updatedAt).toLocaleTimeString() %></div>
+      <div class="border-bottom border-black">Date: <%= entry.date %></div>
+      <div class="w-100 border-bottom border-black">Time: <%= entry.time %></div>
       <div class="w-100">Temperature: <%= entry.celsius%></div>
       <div class="w-100">Water level: <%= entry.distance %>cm</div>
       <div class="w-100">Humidity: <%= entry.humidity %></div>
@@ -68,7 +68,7 @@
           }
           const parsedResponse = await response.json();
           const data = parsedResponse[0];
-          
+
           document.getElementById('status').innerText = data.status;
 
           // Update button visibility
