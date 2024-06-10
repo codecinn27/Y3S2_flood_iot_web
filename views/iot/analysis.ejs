@@ -1,78 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IOT Web App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="/stylesheets/button_alert.css">
-    <link rel="stylesheet" href="/stylesheets/analysis.css">
-</head>
-<body>
+<% layout('layouts/boilerplate') %>
+<div class="container1">
+  <% if(data.id=="duriantunggal"){ %>
+  <iframe loading="lazy" src="https://platform.favoriot.com/public/dashboard/Flood Durian Tunggal/53616c7465645f5fbcdad6d2c5c63da4dd976ca526c8d0e78815b59d8296ee58c6f291537b469604ddaa368766b14605c4be56659066a8522c52f09b4a65409a2e2b531910d0d3573f2b3ef0edd46ecd2f59b86e695e5b2d6130054657d5dc5437dc5805445c9e48f4669d185627e04743cab08f3786aa40ab101f0abee8cfc96e474b5dab47f3b274b1e3d383a79b41d41e0d4728a322c245d2f8baade2778b9a70e8faa5f33db838d82e77318f309603dad00f9f785f327d34d3d4c9006cce137249b9eae3405eaffa96dd396d61f0a7f3106689a2a0c5406b7d32ca24284d" 
+    name="Favoriot Platform" 
+    scrolling="auto" 
+    allowfullscreen>
+  </iframe>
+  <% }else{ %>
+  <iframe loading="lazy" src="https://platform.favoriot.com/public/dashboard/Flood Ayer Keroh/53616c7465645f5fd69138c88ad1203e5e35472fd44d7e5253973f240626fef784ae2825ae33395f6831b82a6bf0c302726eecfa3c50bd5001713f6226abae3c9d43053628beea0ce77ea9b55f41f45a2fab007bcd5c95c9645e02294ad1b4ed00024ef80c967343f580398bb266181f980961c39aa2d98e31f59d8df9396b288f0c00b3d5b95192abe8ae5b27e0327e6d909774eda7d182c14dd16fbb9b1146b85b4aeca88d3076f93534be10cfa526ec6b2d174f22c309e279576f1a678660ec6d037374c6757543b508b23ffe240cedc7ea6c13b419c5c41f582f5a677380" 
+    name="Favoriot Platform" 
+    scrolling="auto" 
+    allowfullscreen>
+  </iframe>
+  <% }%>
+</div>
 
-    <%- include('../partials/navbar')  %>
+<script>
+  function sendFavoriotCommand(value) {
+      const deviceID = 'swiss_gate_1_device@iiotsme'; // Replace with your Favoriot Device ID
+      const apiKey = 'xlVG0tRLXZUQxRQRMcrDxAkRTyBht33Y'; // Replace with your Favoriot API Key
+      const url = `https://apiv2.favoriot.com/v2/streams`;
+      const data = {
+          "device_developer_id": deviceID,
+          "data": {
+          "command": value
+          }
+      };
 
-    <div class="container1">
-      <% if(data.id=="duriantunggal"){ %>
-      <iframe loading="lazy" src="https://platform.favoriot.com/public/dashboard/Flood Durian Tunggal/53616c7465645f5fbcdad6d2c5c63da4dd976ca526c8d0e78815b59d8296ee58c6f291537b469604ddaa368766b14605c4be56659066a8522c52f09b4a65409a2e2b531910d0d3573f2b3ef0edd46ecd2f59b86e695e5b2d6130054657d5dc5437dc5805445c9e48f4669d185627e04743cab08f3786aa40ab101f0abee8cfc96e474b5dab47f3b274b1e3d383a79b41d41e0d4728a322c245d2f8baade2778b9a70e8faa5f33db838d82e77318f309603dad00f9f785f327d34d3d4c9006cce137249b9eae3405eaffa96dd396d61f0a7f3106689a2a0c5406b7d32ca24284d" 
-        name="Favoriot Platform" 
-        scrolling="auto" 
-        allowfullscreen>
-      </iframe>
-      <% }else{ %>
-      <iframe loading="lazy" src="https://platform.favoriot.com/public/dashboard/Flood Ayer Keroh/53616c7465645f5fd69138c88ad1203e5e35472fd44d7e5253973f240626fef784ae2825ae33395f6831b82a6bf0c302726eecfa3c50bd5001713f6226abae3c9d43053628beea0ce77ea9b55f41f45a2fab007bcd5c95c9645e02294ad1b4ed00024ef80c967343f580398bb266181f980961c39aa2d98e31f59d8df9396b288f0c00b3d5b95192abe8ae5b27e0327e6d909774eda7d182c14dd16fbb9b1146b85b4aeca88d3076f93534be10cfa526ec6b2d174f22c309e279576f1a678660ec6d037374c6757543b508b23ffe240cedc7ea6c13b419c5c41f582f5a677380" 
-        name="Favoriot Platform" 
-        scrolling="auto" 
-        allowfullscreen>
-      </iframe>
-      <% }%>
-    </div>
-    <%- include('../partials/footer') %>
+      fetch(url, {
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json',
+          'apikey': apiKey
+          },
+          body: JSON.stringify(data)
+      })
+      .then(response => {
+          if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+      })
+      .then(data => console.log(data))
+      .catch(error => console.error('There was a problem with the fetch operation:', error));
+  };
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-      function sendFavoriotCommand(value) {
-        const deviceID = 'testing_esp8266_1_device@iiotsme'; // Replace with your Favoriot Device ID
-        const apiKey = 'QItZtOeI2AcM7Hak7pRV1YGxfITHzrai'; // Replace with your Favoriot API Key
-        const url = `https://apiv2.favoriot.com/v2/streams`;
-        const data = {
-            "device_developer_id": deviceID,
-            "data": {
-            "command": value
-            }
-        };
+  async function updateData() {
+      try {
+          let endpoint;
+          if ("<%= data.id %>" === "duriantunggal") {
+              endpoint = "/iot/getDurianTunggalData";
+          } else if ("<%= data.id %>" === "ayerkeroh") {
+              endpoint = "/iot/getAyerKerohData";
+          } else {
+              console.error("Invalid data id:", "<%= data.id %>");
+              return;
+          }
 
-        fetch(url, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            'apikey': apiKey
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => console.log(data))
-        .catch(error => console.error('There was a problem with the fetch operation:', error));
+          const response = await fetch(endpoint);
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          const parsedResponse = await response.json();
+          const data = parsedResponse[0];
+          
+          document.getElementById('status').innerText = data.status;
+
+          // Update button visibility
+          const status = data.status;
+          const buttonContainer = document.getElementById("buttonContainer");
+          if (status === "Danger" || status === "Warning") {
+              buttonContainer.style.display = "block";
+          } else {
+              buttonContainer.style.display = "none";
+          }
+      } catch (err) {
+          console.error(err);
       }
+  }
 
-      document.addEventListener('DOMContentLoaded', function() {
-            const button = document.getElementById('toggleButton');
-            
-            button.addEventListener('click', function() {
-                if (button.textContent.trim() === 'Swiss Gate') {
-                    button.textContent = 'Gate Open';
-                    setTimeout(function() {
-                        button.textContent = 'Swiss Gate';
-                    }, 10000); // 20 seconds
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+  // Initial call and interval for updating data
+  document.addEventListener("DOMContentLoaded", () => {
+      updateData();
+      setInterval(updateData, 5000);
+  });
+</script>
+
+
+

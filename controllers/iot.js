@@ -243,15 +243,6 @@ module.exports.renderingData = async(req,res)=>{
         } else {
             throw new Error("Invalid location id");
         }
-        // if(data.id === 'duriantunggal'){
-        //     response = await axios.get('http://localhost:3000/iot/getDurianTunggalData');
-        //     //response = await axios.get('https://iotfloodberr.azurewebsites.net/iot/getDurianTunggalData'); 
-        // }else if (data.id === 'ayerkeroh') {
-        //     response = await axios.get('http://localhost:3000/iot/getAyerKerohData');
-        //     //response = await axios.get('https://iotfloodberr.azurewebsites.net/iot/getAyerKerohData'); 
-        // } else {
-        //     throw new Error("Invalid location id");
-        // }
 
         // Check if response contains data
         const responseData = response.data;

@@ -20,3 +20,74 @@
 <div class="pb-5"></div>
 <div class="pb-3"></div>
 
+<script>
+  function sendFavoriotCommand(value) {
+      const deviceID = 'swiss_gate_1_device@iiotsme'; // Replace with your Favoriot Device ID
+      const apiKey = 'xlVG0tRLXZUQxRQRMcrDxAkRTyBht33Y'; // Replace with your Favoriot API Key
+      const url = `https://apiv2.favoriot.com/v2/streams`;
+      const data = {
+          "device_developer_id": deviceID,
+          "data": {
+          "command": value
+          }
+      };
+
+      fetch(url, {
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json',
+          'apikey': apiKey
+          },
+          body: JSON.stringify(data)
+      })
+      .then(response => {
+          if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+      })
+      .then(data => console.log(data))
+      .catch(error => console.error('There was a problem with the fetch operation:', error));
+  };
+
+  async function updateData() {
+      try {
+          let endpoint;
+          if ("<%= data.id %>" === "duriantunggal") {
+              endpoint = "/iot/getDurianTunggalData";
+          } else if ("<%= data.id %>" === "ayerkeroh") {
+              endpoint = "/iot/getAyerKerohData";
+          } else {
+              console.error("Invalid data id:", "<%= data.id %>");
+              return;
+          }
+
+          const response = await fetch(endpoint);
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          const parsedResponse = await response.json();
+          const data = parsedResponse[0];
+          
+          document.getElementById('status').innerText = data.status;
+
+          // Update button visibility
+          const status = data.status;
+          const buttonContainer = document.getElementById("buttonContainer");
+          if (status === "Danger" || status === "Warning") {
+              buttonContainer.style.display = "block";
+          } else {
+              buttonContainer.style.display = "none";
+          }
+      } catch (err) {
+          console.error(err);
+      }
+  }
+
+  // Initial call and interval for updating data
+  document.addEventListener("DOMContentLoaded", () => {
+      updateData();
+      setInterval(updateData, 5000);
+  });
+</script>
+

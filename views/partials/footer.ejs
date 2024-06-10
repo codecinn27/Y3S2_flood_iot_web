@@ -3,14 +3,14 @@
     <div class="col mx-2 fs-3 fw-bold">
         Status: <span id="status"><%= data.status %></span>
     </div>
-    <div class="col-auto mx-2 button_alert ">
-        <button id="toggleButton" class="fs-4 " onclick="sendFavoriotCommand(1)">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Swiss Gate
-        </button>
+    <div id="buttonContainer" class="col-auto mx-2 button_alert" style="display: none;">
+      <button id="toggleButton" class="fs-4" onclick="sendFavoriotCommand(1)">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Swiss Gate
+      </button>
     </div>
   </div>
 
