@@ -55,25 +55,87 @@ const saveData = async (id, location) => {
     return data;
 };
 
+// function formatDateAndTime(timestamp) {
+//     const date = new Date(timestamp);
+
+//     // Extracting date components
+//     const year = date.getFullYear();
+//     const month = date.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
+//     const day = date.getDate();
+
+//     // Extracting time components
+//     const hours = date.getHours();
+//     const minutes = date.getMinutes();
+//     const seconds = date.getSeconds();
+
+//     // Formatting date and time
+//     const formattedDate = `${year}-${month}-${day}`;
+//     const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+//     return { date: formattedDate, time: formattedTime };
+// }
+
+//new version
+// function formatDateAndTime(timestamp) {
+//     const date = new Date(timestamp);
+
+//     // Extracting date components
+//     const year = date.getFullYear();
+//     const month = date.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
+//     const day = date.getDate();
+
+//     // Extracting time components
+//     let hours = date.getHours();
+//     const minutes = date.getMinutes().toString().padStart(2, '0');
+//     const seconds = date.getSeconds().toString().padStart(2, '0');
+
+//     // Determine AM or PM suffix
+//     const ampm = hours >= 12 ? 'PM' : 'AM';
+
+//     // Convert to 12-hour format
+//     hours = hours % 12;
+//     hours = hours ? hours : 12; // the hour '0' should be '12'
+
+//     // Formatting date and time
+//     const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+//     const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+
+//     return { date: formattedDate, time: formattedTime };
+// }
+
+//3rd version
 function formatDateAndTime(timestamp) {
     const date = new Date(timestamp);
 
-    // Extracting date components
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
-    const day = date.getDate();
+    // Convert date to the specified time zone
+    const options = {
+        timeZone: 'Asia/Kuala_Lumpur',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    };
 
-    // Extracting time components
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
+    // Format the date and time in the specified time zone
+    const formattedDateTime = new Intl.DateTimeFormat('en-US', options).format(date);
 
-    // Formatting date and time
+    // Extract date and time components
+    const [datePart, timePart, periodPart] = formattedDateTime.split(/, | /);
+
+    // Reformat date to YYYY-MM-DD
+    const [month, day, year] = datePart.split('/');
     const formattedDate = `${year}-${month}-${day}`;
-    const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+    // Combine time and period (AM/PM)
+    const formattedTime = `${timePart} ${periodPart}`;
 
     return { date: formattedDate, time: formattedTime };
 }
+
+
 
 
 module.exports.dashboardPage = (req,res)=>{
