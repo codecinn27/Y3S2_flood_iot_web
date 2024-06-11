@@ -4,8 +4,9 @@
         Status:<span id="status"><%= data.status %></span>
     </div>
     <div id="buttonContainer" class="col-auto mx-1 button_alert" style="display: none;">
-      <button id="toggleButton" class="fs-4" onclick="sendFavoriotCommand(1)">
-          <span></span>
+      <!-- <button id="toggleButton" class="fs-4" onclick="sendFavoriotCommand(1)"> -->
+        <button id="toggleButton" class="fs-4" onclick="sendFavoriotCommandWithModal()">
+        <span></span>
           <span></span>
           <span></span>
           <span></span>
@@ -32,5 +33,36 @@
       </a>
     </div>
 </footer>
+
+    
+<script>
+  function sendFavoriotCommandWithModal() {
+      // Call the original function
+      sendFavoriotCommand(1);
+
+      // Show the modal confirming that the Swiss Gate has been opened
+      var gateModal = new bootstrap.Modal(document.getElementById('gateModal'), { backdrop: true });
+      gateModal.show();
+  }
+</script>
+
+  <!-- Modal -->
+  <div class="modal fade" id="gateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="gateModalLabel" aria-hidden="true">
+    <div class="modal-dialog alert alert-success">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gateModalLabel">Swiss Gate Opened 🚪</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>🤟🏻🤟🤟🏽Thank you for your cooperation in opening the Swiss Gate. Your actions help prevent floods and protect our community.</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <p>From: FloodEyE 🙆🏽🙆🏽‍♂️</p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+  </div>
 
 
