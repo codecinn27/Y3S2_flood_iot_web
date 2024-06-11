@@ -76,6 +76,9 @@
           const buttonContainer = document.getElementById("buttonContainer");
           if (status === "Danger" || status === "Warning") {
               buttonContainer.style.display = "block";
+              // Trigger modal if status is "Warning" or "Danger"
+              var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), { backdrop: true });
+              alertModal.show();
           } else {
               buttonContainer.style.display = "none";
           }
@@ -87,7 +90,7 @@
   // Initial call and interval for updating data
   document.addEventListener("DOMContentLoaded", () => {
       updateData();
-      setInterval(updateData, 5000);
+      setInterval(updateData, 10000);
   });
 </script>
 

@@ -24,7 +24,7 @@ The Flood Observatory System is a comprehensive platform designed to monitor wat
     <div class="row py-2">
       <div class="fs-3 text-center py-2">Supervisor</div>        
       <div class="col text-center">
-        <div class=""><img src="https://res.cloudinary.com/du43x2mnv/image/upload/v1714748242/iot_web/1_rcbmr2.png" width="200" height="200" alt="Img1"></div>
+        <div><img class="shadow" style="border: 2px solid black; border-radius: 10px;" src="https://res.cloudinary.com/du43x2mnv/image/upload/v1714748242/iot_web/1_rcbmr2.png" width="200" height="200" alt="Img1"></div>
         <div class="fs-4"><i class="fa-regular fa-user"></i> : Mazran Bin Esro</div>
         <div class="fs-4"><i class="fa-regular fa-envelope"></i> : mazran@utem.edu.my</div>
         <div class="fs-4"><i class="fa-solid fa-phone"></i> : +6062702333</div>
@@ -34,19 +34,19 @@ The Flood Observatory System is a comprehensive platform designed to monitor wat
     <div class="row py-5 justify-content-between">
       <div class="fs-3 text-center py-2">Developers</div>
       <div class="col-12 col-md-4 col-lg-3 text-center mx-auto">
-        <div><img src="https://res.cloudinary.com/du43x2mnv/image/upload/v1714748244/iot_web/2_wxqop4.jpg" width="200" height="200" alt="Img2"></div>
+        <div><img class="shadow" style="border: 2px solid black; border-radius: 10px;" src="https://res.cloudinary.com/du43x2mnv/image/upload/v1714748244/iot_web/2_wxqop4.jpg" width="200" height="200" alt="Img2"></div>
         <div class="fs-4 text-center"><i class="fa-regular fa-user"></i> : Hee Yee Cinn</div>
         <div class="fs-4 text-center text-nowrap responsive-email"><i class="fa-regular fa-envelope"></i> : codecinnpro@gmail.com</div>
         <div class="fs-4 text-center mb-5"><i class="fa-solid fa-phone"></i> : +60176016227</div>
       </div>
       <div class="col-12 col-md-4 col-lg-3 text-center mx-auto">
-        <div><img src="https://res.cloudinary.com/du43x2mnv/image/upload/v1714748241/iot_web/4_ry2uay.jpg" width="200" height="200" alt="Img3"></div>
+        <div><img class="shadow" style="border: 2px solid black; border-radius: 10px;" src="https://res.cloudinary.com/du43x2mnv/image/upload/v1714748241/iot_web/4_ry2uay.jpg" width="200" height="200" alt="Img3"></div>
         <div class="fs-4 text-center"><i class="fa-regular fa-user"></i> : Lee Zhao Tian</div>
         <div class="fs-4 text-center text-nowrap responsive-email"><i class="fa-regular fa-envelope"></i> : zhaotian.org@gmail.com</div>
         <div class="fs-4 text-center mb-5""><i class="fa-solid fa-phone"></i> : +60177965578</div>
       </div>
       <div class="col-12 col-md-4 col-lg-3 text-center mx-auto">
-        <div><img src="https://res.cloudinary.com/du43x2mnv/image/upload/v1714748239/iot_web/3_cg3oft.jpg" width="200" height="200" alt="Img4"></div>
+        <div><img class="shadow" style="border: 2px solid black; border-radius: 10px;" src="https://res.cloudinary.com/du43x2mnv/image/upload/v1714748239/iot_web/3_cg3oft.jpg" width="200" height="200" alt="Img4"></div>
         <div class="fs-4 text-center"><i class="fa-regular fa-user"></i> : Wee Mao Phin</div>
         <div class="fs-4 text-center text-nowrap responsive-email"><i class="fa-regular fa-envelope"></i> : weemaophin@gmail.com</div>
         <div class="fs-4 text-center mb-5""><i class="fa-solid fa-phone"></i> : +60187863383</div></div>
@@ -110,6 +110,9 @@ The Flood Observatory System is a comprehensive platform designed to monitor wat
             const buttonContainer = document.getElementById("buttonContainer");
             if (status === "Danger" || status === "Warning") {
                 buttonContainer.style.display = "block";
+                // Trigger modal if status is "Warning" or "Danger"
+                var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), { backdrop: true });
+                alertModal.show();
             } else {
                 buttonContainer.style.display = "none";
             }
@@ -121,6 +124,6 @@ The Flood Observatory System is a comprehensive platform designed to monitor wat
     // Initial call and interval for updating data
     document.addEventListener("DOMContentLoaded", () => {
         updateData();
-        setInterval(updateData, 5000);
+        setInterval(updateData, 10000);
     });
   </script>
