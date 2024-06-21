@@ -3,7 +3,7 @@
 </p>
 
 
-# Flood Observatory System
+# FloodEyE (Flood Observatory System)
 - public website for realtime data reading for IOT using Favoriot platform and display into a webapp and trigger notification to telegram 
 
 # Website link
@@ -20,9 +20,40 @@
 <img src="	https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white">
 ![Static Badge](https://img.shields.io/badge/ExpressJs-%23000000?style=for-the-badge&logo=express)
 ![Static Badge](https://img.shields.io/badge/cloudinary-%233448C5?style=for-the-badge&logo=cloudinary&logoColor=white&labelColor=%236CB4EE&color=%236CB4EE)
+
+# Poster
+<p align="center">
+  <img src="https://github.com/codecinn27/flood_iot_web/assets/103735025/424b3bdb-1640-4b18-a2ab-cd2b10d62cd8" height="600" alt="poster">
+</p>
+
 # Components needed
 Ultrasonic Sensor, Rain Sensor, Dht11, 20x4 I2C LCD, esp32
 # Hardware Circuit design 
+<img src="https://github.com/codecinn27/flood_iot_web/assets/103735025/10912310-4317-4fc1-815b-752236940fed" width="500" alt="Image 1">
+<img src="https://github.com/codecinn27/flood_iot_web/assets/103735025/76e14b96-174e-4207-b79b-5c3b78c53942" width="500" alt="Image 2">
+<p align="center">
+  <img src="https://github.com/codecinn27/flood_iot_web/assets/103735025/f92b0dc9-6957-4f4e-bd24-a6c1c18a473e" height="500" alt="Image 3"> 
+</p>
+
+
+# Program FlowChart
+<p align="center">
+  <img src="https://github.com/codecinn27/flood_iot_web/assets/103735025/1d670726-35cd-411b-9035-1d495b3bfb09" width="400" alt="flowchart">  
+</p>
+
+
+# Frontend
+![image](https://github.com/codecinn27/flood_iot_web/assets/103735025/97f0a1fa-70eb-4df2-bc86-91f01ffac060)
+![image](https://github.com/codecinn27/flood_iot_web/assets/103735025/2b19bf0d-82e7-4d5a-8f9e-9b4b0cbdc0ec)
+<p align="center">
+  <img src="https://github.com/codecinn27/flood_iot_web/assets/103735025/e0472138-45e7-455d-87ce-0832a032433f" width="450" alt="Alert Message">
+</p>
+
+
+# Telegram bot alert notification
+<p>Using telegram api and botfather, this can be setup at arduino ide to trigger message straigth from esp32 to the telegram group</p>
+![image](https://github.com/codecinn27/flood_iot_web/assets/103735025/537a5c69-dee9-4bac-9a9b-a31b72459619)
+
 
 # How to install and Configuration
 1. ``npm install`` ::
@@ -42,5 +73,11 @@ Ultrasonic Sensor, Rain Sensor, Dht11, 20x4 I2C LCD, esp32
         GET_DATA_DURIAN_TUNGGAL = ""
         API_KEY_DURIAN_TUNGGAL = ""
         DEVICE_DEV_ID_DURIAN_TUNGGAL = ""
+
+# Reward
+<p align="center">
+  <img src="https://github.com/codecinn27/flood_iot_web/assets/103735025/df1f3deb-30f0-4812-a054-716de9229833" alt="Reward">
+</p>
+
 
 
