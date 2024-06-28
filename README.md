@@ -51,9 +51,10 @@ Ultrasonic Sensor, Rain Sensor, Dht11, 20x4 I2C LCD, esp32
 
 
 # Telegram bot alert notification
-<p>Using telegram api and botfather, this can be setup at arduino ide to trigger message straigth from esp32 to the telegram group</p>
-![image](https://github.com/codecinn27/flood_iot_web/assets/103735025/537a5c69-dee9-4bac-9a9b-a31b72459619)
-
+<p>Using telegram api and botfather, this can be setup at arduino ide to trigger message straight from esp32 to the telegram group</p>
+<p align="center">
+  <img src="https://github.com/codecinn27/flood_iot_web/assets/103735025/537a5c69-dee9-4bac-9a9b-a31b72459619" width="450" alt="Telegram Message">
+</p>
 
 # How to install and Configuration
 1. ``npm install`` ::
